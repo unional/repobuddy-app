@@ -1,0 +1,40 @@
+{
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "extends": [
+    "plugin:harmony/latest"
+  ],
+  "overrides": [
+    {
+      "extends": "plugin:harmony/ts-recommended",
+      "files": [
+        "*.spec.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/no-unused-vars": 0,
+        "no-constant-condition": 0,
+        "no-use-before-define": "off",
+        "prefer-const": 0,
+        "require-yield": 0
+      }
+    },
+    {
+      "extends": "plugin:harmony/ts-recommended",
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "excludedFiles": [
+        "*.spec.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/ban-types": "off",
+        "no-use-before-define": "off"
+      }
+    }
+  ]
+}
