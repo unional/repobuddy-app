@@ -2,7 +2,7 @@ import { Probot } from 'probot'
 
 export = (app: Probot) => {
   app.on('*', (event) => {
-    console.info(event.name, event.payload)
+    console.warn(event.name, event.payload)
   })
   app.on('issues.opened', async (context) => {
     const issueComment = context.issue({
