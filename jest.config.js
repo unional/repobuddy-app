@@ -1,8 +1,8 @@
 module.exports = {
   preset: 'ts-jest',
-  roots: ["<rootDir>/ts/"],
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  testEnvironment: "node",
+  roots: ['<rootDir>/ts/'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  testEnvironment: 'node',
   testMatch: ['**/?(*.)+(spec|test|integrate|accept|system|unit).[jt]s?(x)'],
   watchPlugins: [
     'jest-watch-suspend',

@@ -1,23 +1,25 @@
 {
-  "name": "syncbuddy",
+  "name": "repobuddy",
   "version": "1.0.0",
   "private": true,
-  "description": "Handles the boring work about repository management",
-  "author": "Homa Wong <homawong@gmail.com>",
-  "license": "ISC",
-  "homepage": "https://github.com/unional/syncbuddy",
+  "description": "Handles the boring work of repository management",
   "keywords": [
     "probot",
     "github",
     "probot-app"
   ],
+  "homepage": "https://github.com/repobuddy",
+  "license": "MIT",
+  "author": "Homa Wong <homawong@gmail.com>",
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "clean": "rimraf dist cjs",
     "coverage": "jest --coverage",
-    "build": "tsc",
     "lint": "eslint --ext=js,ts .",
     "start": "probot run ./cjs/index.js",
     "test": "jest",
+    "verify": "run-p verify:build coverage",
+    "verify:build": "npm-run-all clean build",
     "watch": "jest --watch"
   },
   "husky": {

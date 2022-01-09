@@ -1,33 +1,23 @@
-# syncbuddy
+# repobuddy
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that A Probot app
+Handles the boring work of repository management.
 
 ## Setup
 
 ```sh
 # Install dependencies
-npm install
+yarn
 
 # Run the bot
-npm start
+yarn start
 ```
 
 ## Docker
 
 ```sh
 # 1. Build container
-docker build -t syncbuddy .
+docker build -t repobuddy .
 
 # 2. Start container
 docker run -e APP_ID=<app-id> -e PRIVATE_KEY=<pem-value> syncbuddy
 ```
-
-## Contributing
-
-If you have suggestions for how syncbuddy could be improved, or want to report a bug, open an issue! We'd love all and any contributions.
-
-For more, check out the [Contributing Guide](CONTRIBUTING.md).
-
-## License
-
-[ISC](LICENSE) © 2022 Homa Wong <homawong@gmail.com>
