@@ -1,9 +1,9 @@
 import { Probot } from 'probot'
+import { checkSuiteRequested } from './checkSuiteRequested'
 
 export = (app: Probot) => {
-  app.on('*', (event) => {
-    console.warn(event.name, event.payload)
-  })
+  app.webhooks.onAny(event => console.info(event.name, event.payload))
+  checkSuiteRequested(app)
   app.on('issues.opened', async (context) => {
     const issueComment = context.issue({
       body: 'Thanks for opening this issue!',

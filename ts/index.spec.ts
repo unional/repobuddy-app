@@ -30,7 +30,9 @@ describe('My Probot app', () => {
     return probot.load(myProbotApp);
   });
 
-  test('creates a comment when an issue is opened', async (done) => {
+  test('creates a comment when an issue is opened', async () => {
+    let done : (value: any)=>void
+    const p = new Promise(a => done = a)
     const mock = nock('https://api.github.com')
       // Test that we correctly return a test token
       .post('/app/installations/2/access_tokens')
@@ -48,10 +50,12 @@ describe('My Probot app', () => {
       })
       .reply(200);
 
-    // Receive a webhook event
+    // @ts-ignore
     await probot.receive({ name: 'issues', id: 'some id', payload });
 
     expect(mock.pendingMocks()).toStrictEqual([]);
+
+    return p
   });
 
   afterEach(() => {
