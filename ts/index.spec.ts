@@ -1,21 +1,19 @@
-import nock from "nock";
-import { Probot, ProbotOctokit } from "probot";
 import fs from 'fs'
+import nock from 'nock'
 import path from 'path'
+import { Probot, ProbotOctokit } from 'probot'
+import myProbotApp from '.'
+import payload from './fixtures/issues.opened.json'
 
-import myProbotApp from ".";
-
-import payload from "./fixtures/issues.opened.json";
-
-const issueCreatedBody = { body: "Thanks for opening this issue!" };
+const issueCreatedBody = { body: 'Thanks for opening this issue!' }
 
 const privateKey = fs.readFileSync(
-  path.join(__dirname, "fixtures/mock-cert.pem"),
-  "utf-8"
+  path.join(__dirname, 'fixtures/mock-cert.pem'),
+  'utf-8'
 );
 
-describe("My Probot app", () => {
-  let probot: any;
+describe('My Probot app', () => {
+  let probot: Probot;
 
   beforeEach(() => {
     nock.disableNetConnect();
@@ -29,29 +27,29 @@ describe("My Probot app", () => {
       }),
     });
     // Load our app into probot
-    probot.load(myProbotApp);
+    return probot.load(myProbotApp);
   });
 
-  test("creates a comment when an issue is opened", async (done) => {
-    const mock = nock("https://api.github.com")
+  test('creates a comment when an issue is opened', async (done) => {
+    const mock = nock('https://api.github.com')
       // Test that we correctly return a test token
-      .post("/app/installations/2/access_tokens")
+      .post('/app/installations/2/access_tokens')
       .reply(200, {
-        token: "test",
+        token: 'test',
         permissions: {
-          issues: "write",
+          issues: 'write',
         },
       })
 
       // Test that a comment is posted
-      .post("/repos/hiimbex/testing-things/issues/1/comments", (body: any) => {
+      .post('/repos/hiimbex/testing-things/issues/1/comments', (body: any) => {
         done(expect(body).toMatchObject(issueCreatedBody));
         return true;
       })
       .reply(200);
 
     // Receive a webhook event
-    await probot.receive({ name: "issues", payload });
+    await probot.receive({ name: 'issues', id: 'some id', payload });
 
     expect(mock.pendingMocks()).toStrictEqual([]);
   });
